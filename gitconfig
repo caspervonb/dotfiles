@@ -4,5 +4,8 @@
 [color]
 	ui = true
 
+[credential]
+	helper = cache --timeout=3600
+
 [include]
   path = ~/.gitconfig_user
