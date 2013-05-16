@@ -1,11 +1,21 @@
 #!/bin/sh
 
-# Determine the colorscheme
+# Use the default profile
+profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
+profile_path=/apps/gnome-terminal/profiles/$profile
+
+# Print the current colorscheme if no arguments are given.
+if [[ -z "$1" ]]; then
+  echo $(gconftool-2 -g $profile_path/colorscheme)
+  exit
+fi
+
+# Determine the colorscheme to set.
 case $1 in
 zenburn)
 bold_color="#E3E3CECEABAB"
 background_color="#3F3F3F3F3F3F"
-foreground_color="DCDCDCDCCCCC"
+foreground_color="#DCDCDCDCCCCC"
 palette="#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC:#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC"
 ;;
 
@@ -28,21 +38,17 @@ echo "Couldn't find colorscheme $1"
 exit -1
 esac
 
-# Use the default profile
-profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
-profile_path=/apps/gnome-terminal/profiles/$profile
-
 # Set the colors
 gconftool-2 -s -t string $profile_path/background_color $background_color 
 gconftool-2 -s -t string $profile_path/foreground_color $foreground_color
 gconftool-2 -s -t string $profile_path/bold_color $bold_color
 gconftool-2 -s -t string $profile_path/palette $palette
 
-# ensure we use custom colors
+# Ensure we use custom colors
 gconftool-2 -s -t bool $profile_path/use_theme_colors false
 gconftool-2 -s -t bool $profile_path/bold_color_same_as_fg false
 
-# save the name of the colorscheme
+# Save the name of the colorscheme
 gconftool-2 -s -t string $profile_path/colorscheme $1
 
 exit
