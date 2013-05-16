@@ -1,0 +1,5 @@
+#!/bin/sh
+
+if [[ "$COLORTERM" == "gnome-terminal" ]]; then
+  gnome-terminal-colorscheme $1
+fi
