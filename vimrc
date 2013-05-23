@@ -26,3 +26,10 @@ let s:name=split(s:name, "-")[0]
 
 " Finally try to set the colorscheme
 execute "colorscheme " . s:name
+
+" Auto commands
+if has("autocmd")
+  " Auto source screenrc files when running inside a screen session
+  autocmd bufwritepost screenrc ! screen -X source %:p && screen -X redisplay
+
+endif
