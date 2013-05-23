@@ -12,41 +12,41 @@ fi
 
 # Determine the colorscheme to set.
 case $1 in
-zenburn)
-bold_color="#E3E3CECEABAB"
-background_color="#3F3F3F3F3F3F"
-foreground_color="#DCDCDCDCCCCC"
-palette="#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC:#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC"
-;;
+  zenburn)
+    bold_color="#E3E3CECEABAB"
+    background_color="#3F3F3F3F3F3F"
+    foreground_color="#DCDCDCDCCCCC"
+    palette="#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC:#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC"
+    ;;
 
-solarized | solarized-light)
-bold_color="#58586e6e7575"
-background_color="#fdfdf6f6e3e3"
-foreground_color="#65657b7b8383"
-palette="#070736364242:#DCDC32322F2F:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
-;;
+  solarized | solarized-light)
+    bold_color="#58586e6e7575"
+    background_color="#fdfdf6f6e3e3"
+    foreground_color="#65657b7b8383"
+    palette="#070736364242:#DCDC32322F2F:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
+    ;;
 
-solarized-dark)
-bold_color="#58586e6e7575"
-background_color="#00002B2B3636"
-foreground_color="#838394949696"
-palette="#070736364242:#DCDC32322F2F:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
-;;
+  solarized-dark)
+    bold_color="#58586e6e7575"
+    background_color="#00002B2B3636"
+    foreground_color="#838394949696"
+    palette="#070736364242:#DCDC32322F2F:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
+    ;;
 
-smyck)
-  foreground_color="#F7F7F7"
-  background_color="#1B1B1B"
-  bold_color="#FFFFFF"
-  palette="#000000:#B74131:#7DA900:#C4A400:#62A3C4:#B98ACC:#207383:#A0A0A0:#7A7A7A:#D6837B:#C4F036:#FEE14D:#8DCFF0:#F799FF:#69D9CF:#F7F7F7"
-;;
+  smyck)
+    foreground_color="#F7F7F7"
+    background_color="#1B1B1B"
+    bold_color="#FFFFFF"
+    palette="#000000:#B74131:#7DA900:#C4A400:#62A3C4:#B98ACC:#207383:#A0A0A0:#7A7A7A:#D6837B:#C4F036:#FEE14D:#8DCFF0:#F799FF:#69D9CF:#F7F7F7"
+    ;;
 
-*)
-echo "Couldn't find colorscheme $1"
-exit -1
+  *)
+    echo "Couldn't find colorscheme $1"
+    exit -1
 esac
 
 # Set the colors
-gconftool-2 -s -t string $profile_path/background_color $background_color 
+gconftool-2 -s -t string $profile_path/background_color $background_color
 gconftool-2 -s -t string $profile_path/foreground_color $foreground_color
 gconftool-2 -s -t string $profile_path/bold_color $bold_color
 gconftool-2 -s -t string $profile_path/palette $palette
