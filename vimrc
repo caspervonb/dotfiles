@@ -34,7 +34,7 @@ if has("autocmd")
 
   " Auto source screenrc files when running inside a screen session
   if !empty($STY)
-    autocmd bufwritepost screenrc ! screen -S $STY -X source %:p && screen -S $STY -X redisplay
+    autocmd bufwritepost screenrc silent ! screen -S $STY -X source %:p && screen -S $STY -X redisplay
   endif
 
   " Strip trailing whitespaces before save.
