@@ -1,0 +1,8 @@
+# Disable startup message.
+startup_message off
+
+# Enable altscreen.
+altscreen on
+
+# Enable hardstatus.
+hardstatus alwayslastline "%w"
