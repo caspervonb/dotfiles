@@ -29,6 +29,9 @@ execute "colorscheme " . s:name
 
 " Auto commands
 if has("autocmd")
+  " Auto source vimrc files
+  autocmd! bufwritepost vimrc source %
+
   " Auto source screenrc files when running inside a screen session
   autocmd bufwritepost screenrc ! screen -X source %:p && screen -X redisplay
 
