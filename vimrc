@@ -33,9 +33,10 @@ if has("autocmd")
   autocmd! bufwritepost vimrc source %
 
   " Auto source screenrc files when running inside a screen session
-  autocmd bufwritepost screenrc ! screen -X source %:p && screen -X redisplay
+  if !empty($STY)
+    autocmd bufwritepost screenrc ! screen -S $STY -X source %:p && screen -S $STY -X redisplay
+  endif
 
   " Strip trailing whitespaces before save.
   autocmd bufwritepre * :%s/\s\+$//e
-
 endif
