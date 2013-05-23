@@ -32,4 +32,7 @@ if has("autocmd")
   " Auto source screenrc files when running inside a screen session
   autocmd bufwritepost screenrc ! screen -X source %:p && screen -X redisplay
 
+  " Strip trailing whitespaces before save.
+  autocmd bufwritepre * :%s/\s\+$//e
+
 endif
