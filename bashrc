@@ -5,5 +5,5 @@ fi
 
 # Source ~/.shrc
 if [ -f "$HOME/.shrc" ]; then
-    source $HOME/.shrc
+  source $HOME/.shrc
 fi
