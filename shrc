@@ -7,3 +7,6 @@ fi
 if [ -d "$HOME/bin" ]; then
   export PATH="$PATH:$HOME/bin"
 fi
+
+# Set vim as the default editor.
+export EDITOR="vim"
