@@ -10,7 +10,7 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
-" Colorscheme
+" Get name of the terminal colorscheme.
 let s:name=system("colorscheme")
 
 " Use default if not set.
@@ -18,13 +18,13 @@ if empty(s:name)
   let s:name="default"
 endif
 
-" Set background based on if the word is contained within the scheme name
+" Set background based on the naming convention of the colorscheme.
 let &background= (s:name =~ "dark" ? "dark" : "light")
 
-" Strip any describing words from the scheme name
+" Strip any describing words from the scheme name.
 let s:name=split(s:name, "-")[0]
 
-" Finally try to set the colorscheme
+" Apply the colorscheme.
 execute "colorscheme " . s:name
 
 " Auto commands
