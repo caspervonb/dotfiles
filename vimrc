@@ -10,6 +10,10 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
+" Show line numbers.
+set number
+set numberwidth=3
+
 " Get name of the terminal colorscheme.
 let s:name=system("colorscheme")
 
