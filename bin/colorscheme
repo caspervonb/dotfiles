@@ -1,5 +1,81 @@
 #!/bin/sh
 
-if [[ "$COLORTERM" == "gnome-terminal" ]]; then
-  gnome-terminal-colorscheme $1
+# Applies the given colorscheme to the default profile.
+#
+_gnome_terminal_apply_colorscheme() {
+  case $1 in
+    desert)
+      local foreground_color="#FFFFFF"
+      local background_color="#333333"
+      local bold_color="#FFD700"
+      local palette="#4D4D4D:#FF2B2B:#98FB98:#F0E68C:#CD853F:#FFDEAD:#FFA0A0:#F5DEB3:#555555:#FF5555:#55FF55:#FFFF55:#87CEFF:#FF55FF:#FFD700:#FFFFFF"
+      ;;
+
+    zenburn)
+      local bold_color="#E3E3CECEABAB"
+      local background_color="#3F3F3F3F3F3F"
+      local foreground_color="#DCDCDCDCCCCC"
+      local palette="#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC:#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC"
+      ;;
+
+    solarized | solarized-light)
+      local bold_color="#58586e6e7575"
+      local background_color="#fdfdf6f6e3e3"
+      local foreground_color="#65657b7b8383"
+      local palette="#070736364242:#DCDC32322F2F:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
+      ;;
+
+    solarized-dark)
+      local bold_color="#58586e6e7575"
+      local background_color="#00002B2B3636"
+      local foreground_color="#838394949696"
+      local palette="#070736364242:#DCDC32322F2F:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
+      ;;
+
+    smyck)
+      local foreground_color="#F7F7F7"
+      local fackground_color="#1B1B1B"
+      local bold_color="#FFFFFF"
+      local palette="#000000:#B74131:#7DA900:#C4A400:#62A3C4:#B98ACC:#207383:#A0A0A0:#7A7A7A:#D6837B:#C4F036:#FEE14D:#8DCFF0:#F799FF:#69D9CF:#F7F7F7"
+      ;;
+
+    *)
+      echo "Couldn't find colorscheme $1"
+      exit -1
+  esac
+
+  local profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
+  local profile_path=/apps/gnome-terminal/profiles/$profile
+
+  gconftool-2 -s -t string $profile_path/background_color $background_color
+  gconftool-2 -s -t string $profile_path/foreground_color $foreground_color
+  gconftool-2 -s -t string $profile_path/bold_color $bold_color
+  gconftool-2 -s -t string $profile_path/palette $palette
+
+  # Ensure we use custom colors
+  gconftool-2 -s -t bool $profile_path/use_theme_colors false
+  gconftool-2 -s -t bool $profile_path/bold_color_same_as_fg false
+
+  # Save the name of the colorscheme
+  gconftool-2 -s -t string $profile_path/colorscheme $1
+}
+
+# Gets the name of the colorscheme currently applied.
+#
+_gnome_terminal_get_colorscheme() {
+  local profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
+  local profile_path=/apps/gnome-terminal/profiles/$profile
+
+  echo $(gconftool-2 -g $profile_path/colorscheme)
+}
+
+if [[ "$COLORTERM" != "gnome-terminal" ]]; then
+  echo "Unsupported terminal emulator."
+  exit -1
+fi
+
+if [[ -z "$1" ]]; then
+  _gnome_terminal_get_colorscheme
+else
+  _gnome_terminal_apply_colorscheme $1
 fi
