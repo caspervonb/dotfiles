@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Lists the available colorschemes in the script.
+#
+_gnome_terminal_list_colorschemes() {
+  echo -e "desert\nzenburn\nsolarized-light\nsolarized-dark\nsmyck"
+}
+
 # Applies the given colorscheme to the default profile.
 #
 _gnome_terminal_apply_colorscheme() {
@@ -34,7 +40,7 @@ _gnome_terminal_apply_colorscheme() {
 
     smyck)
       local foreground_color="#F7F7F7"
-      local fackground_color="#1B1B1B"
+      local background_color="#1B1B1B"
       local bold_color="#FFFFFF"
       local palette="#000000:#B74131:#7DA900:#C4A400:#62A3C4:#B98ACC:#207383:#A0A0A0:#7A7A7A:#D6837B:#C4F036:#FEE14D:#8DCFF0:#F799FF:#69D9CF:#F7F7F7"
       ;;
@@ -76,6 +82,8 @@ fi
 
 if [[ -z "$1" ]]; then
   _gnome_terminal_get_colorscheme
+elif [[ "$1" == "-ls" || "$1" == "--list" ]]; then
+  _gnome_terminal_list_colorschemes
 else
   _gnome_terminal_apply_colorscheme $1
 fi
