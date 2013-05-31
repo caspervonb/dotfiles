@@ -7,3 +7,8 @@ fi
 if [ -f "$HOME/.shrc" ]; then
   source $HOME/.shrc
 fi
+
+# Source completions
+for file in $HOME/.bash/completion/*; do
+  source $file;
+done

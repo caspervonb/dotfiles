@@ -1,0 +1,13 @@
+#!/bin/bash
+
+_colorscheme()
+{
+  if [ -z "$COLORSCHEMES" ]; then
+    COLORSCHEMES=( $(colorscheme -ls | tr '\n' ' ') )
+  fi
+
+  local cur=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=( $(compgen -W "${COLORSCHEMES[*]}" -- $cur) )
+}
+
+complete -F _colorscheme colorscheme
