@@ -18,24 +18,24 @@ _gnome_terminal_apply_colorscheme() {
       ;;
 
     zenburn)
-      local bold_color="#E3E3CECEABAB"
-      local background_color="#3F3F3F3F3F3F"
-      local foreground_color="#DCDCDCDCCCCC"
-      local palette="#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC:#3F3F3F3F3F3F:#CCCC93939393:#7F7F9F9F7F7F:#E3E3CECEABAB:#DFDFAFAF8F8F:#CCCC93939393:#8C8CD0D0D3D3:#DCDCDCDCCCCC"
+      local bold_color="#E3CEAB"
+      local background_color="#3F3F3F"
+      local foreground_color="#DCDCCC"
+      local palette="#3F3F3F:#CC9393:#7F9F7F:#E3CEAB:#DFAF8F:#CC9393:#8CD0D3:#DCDCCC:#3F3F3F:#CC9393:#7F9F7F:#E3CEAB:#DFAF8F:#CC9393:#8CD0D3:#DCDCCC"
       ;;
 
     solarized | solarized-light)
-      local bold_color="#58586e6e7575"
-      local background_color="#fdfdf6f6e3e3"
-      local foreground_color="#65657b7b8383"
-      local palette="#070736364242:#DCDC32322F2F:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
+      local bold_color="#586e75"
+      local background_color="#fdf6e3"
+      local foreground_color="#657b83"
+      local palette="#073642:#DC322F:#859900:#B58900:#268BD2:#D33682:#2AA198:#EEE8D5:#002B36:#CB4B16:#586E75:#657B83:#839496:#6C71C4:#93A1A1:#FDF6E3"
       ;;
 
     solarized-dark)
-      local bold_color="#58586e6e7575"
-      local background_color="#00002B2B3636"
-      local foreground_color="#838394949696"
-      local palette="#070736364242:#DCDC32322F2F:#858599990000:#B5B589890000:#26268B8BD2D2:#D3D336368282:#2A2AA1A19898:#EEEEE8E8D5D5:#00002B2B3636:#CBCB4B4B1616:#58586E6E7575:#65657B7B8383:#838394949696:#6C6C7171C4C4:#9393A1A1A1A1:#FDFDF6F6E3E3"
+      local bold_color="#586e75"
+      local background_color="#002B36"
+      local foreground_color="#839496"
+      local palette="#073642:#DC322F:#859900:#B58900:#268BD2:#D33682:#2AA198:#EEE8D5:#002B36:#CB4B16:#586E75:#657B83:#839496:#6C71C4:#93A1A1:#FDF6E3"
       ;;
 
     smyck)
