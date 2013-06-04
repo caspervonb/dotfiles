@@ -7,6 +7,9 @@ execute pathogen#infect()
 " Enable filetype plugins
 filetype plugin indent on
 
+" Set wildignore
+set wildignore+=*/build/*,*/tmp/*,*.so,*.swp,*.zip
+
 " Indendaton
 set tabstop=2
 set softtabstop=2
