@@ -4,6 +4,9 @@ set nocompatible
 " Enable pathogen
 execute pathogen#infect()
 
+" Enable filetype plugins
+filetype plugin indent on
+
 " Indendaton
 set tabstop=2
 set softtabstop=2
