@@ -1,12 +1,12 @@
 #!/bin/sh
 
-# Lists the available colorschemes in the script.
+# Lists the available colorschemes for gnome-terminal.
 #
 _gnome_terminal_list_colorschemes() {
   echo -e "desert\nzenburn\nsolarized-light\nsolarized-dark\nsmyck"
 }
 
-# Applies the given colorscheme to the default profile.
+# Applies the given colorscheme to the default gnome-terminal profile.
 #
 _gnome_terminal_apply_colorscheme() {
   case $1 in
@@ -66,7 +66,7 @@ _gnome_terminal_apply_colorscheme() {
   gconftool-2 -s -t string $profile_path/colorscheme $1
 }
 
-# Gets the name of the colorscheme currently applied.
+# Gets the name of the colorscheme currently applied to gnome-terminal.
 #
 _gnome_terminal_get_colorscheme() {
   local profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
