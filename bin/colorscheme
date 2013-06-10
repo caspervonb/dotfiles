@@ -2,13 +2,13 @@
 
 # Lists the available colorschemes for gnome-terminal.
 #
-_gnome_terminal_list_colorschemes() {
+gnome_terminal_list_colorschemes() {
   echo -e "desert\nzenburn\nsolarized-light\nsolarized-dark\nsmyck"
 }
 
 # Applies the given colorscheme to the default gnome-terminal profile.
 #
-_gnome_terminal_apply_colorscheme() {
+gnome_terminal_apply_colorscheme() {
   case $1 in
     desert)
       local foreground_color="#FFFFFF"
@@ -68,7 +68,7 @@ _gnome_terminal_apply_colorscheme() {
 
 # Gets the name of the colorscheme currently applied to gnome-terminal.
 #
-_gnome_terminal_get_colorscheme() {
+gnome_terminal_get_colorscheme() {
   local profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
   local profile_path=/apps/gnome-terminal/profiles/$profile
 
@@ -81,9 +81,9 @@ if [[ "$COLORTERM" != "gnome-terminal" ]]; then
 fi
 
 if [[ -z "$1" ]]; then
-  _gnome_terminal_get_colorscheme
+  gnome_terminal_get_colorscheme
 elif [[ "$1" == "-ls" || "$1" == "--list" ]]; then
-  _gnome_terminal_list_colorschemes
+  gnome_terminal_list_colorschemes
 else
-  _gnome_terminal_apply_colorscheme $1
+  gnome_terminal_apply_colorscheme $1
 fi
