@@ -6,3 +6,21 @@ altscreen on
 
 # Enable hardstatus.
 hardstatus alwayslastline "%w"
+
+# Vi-escque bindings.
+bind o only
+bind s split
+bind v split -v
+bind = resize =
+bind + resize +3
+bind - resize -3
+
+bind j focus down
+bind k focus up
+bind h focus left
+bind l focus right
+
+bind "^[[B" focus down
+bind "^[[A" focus up
+bind "^[[D" focus left
+bind "^[[C" focus right
