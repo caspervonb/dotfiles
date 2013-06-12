@@ -50,3 +50,7 @@ if has("autocmd")
   " Strip trailing whitespaces before save.
   autocmd bufwritepre * :%s/\s\+$//e
 endif
+
+" Enable per directory .vimrc files
+set exrc
+set secure
