@@ -11,9 +11,9 @@ filetype plugin indent on
 set wildignore+=*/build/*,*/tmp/*,*.so,*.swp,*.zip
 
 " Indendaton
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
+set tabstop=3
+set softtabstop=3
+set shiftwidth=3
 set expandtab
 
 " Show line numbers.
