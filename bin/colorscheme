@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# Gets the gnome-terminal's version number.
+gnome_terminal_version() {
+  echo `expr "$(gnome-terminal --version)" : '.*\(.\+[.].\+[.].\+\)$'`
+}
+
 # Lists the available colorschemes for gnome-terminal.
 #
 gnome_terminal_list_colorschemes() {
@@ -50,29 +55,51 @@ gnome_terminal_apply_colorscheme() {
       exit -1
   esac
 
-  local profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
-  local profile_path=/apps/gnome-terminal/profiles/$profile
+  if [ "$(gnome_terminal_version | cut -d"." -f1)$(gnome_terminal_version | cut -d"." -f2)" -ge 38 ]; then
+    local profile=$(dconf list /org/gnome/terminal/legacy/profiles:/ | head -1 | sed 's:/$::')
+    local profile_path="/org/gnome/terminal/legacy/profiles:/$profile"
 
-  gconftool-2 -s -t string $profile_path/background_color $background_color
-  gconftool-2 -s -t string $profile_path/foreground_color $foreground_color
-  gconftool-2 -s -t string $profile_path/bold_color $bold_color
-  gconftool-2 -s -t string $profile_path/palette $palette
+    dconf write $profile_path/background-color "'$background_color'"
+    dconf write $profile_path/foreground-color "'$foreground_color'"
+    dconf write $profile_path/bold-color "'$bold_color'"
+    dconf write $profile_path/palette "'$palette'"
 
-  # Ensure we use custom colors
-  gconftool-2 -s -t bool $profile_path/use_theme_colors false
-  gconftool-2 -s -t bool $profile_path/bold_color_same_as_fg false
+    dconf write $profile_path/use-theme-colors "false"
+    dconf write $profile_path/bold-color-same-as-fg "false"
 
-  # Save the name of the colorscheme
-  gconftool-2 -s -t string $profile_path/colorscheme $1
+    dconf write $profile_path/colorscheme "'$1'"
+  else
+    local profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
+    local profile_path=/apps/gnome-terminal/profiles/$profile
+
+    gconftool-2 -s -t string $profile_path/background_color $background_color
+    gconftool-2 -s -t string $profile_path/foreground_color $foreground_color
+    gconftool-2 -s -t string $profile_path/bold_color $bold_color
+    gconftool-2 -s -t string $profile_path/palette $palette
+
+    # Ensure we use custom colors
+    gconftool-2 -s -t bool $profile_path/use_theme_colors false
+    gconftool-2 -s -t bool $profile_path/bold_color_same_as_fg false
+
+    # Save the name of the colorscheme
+    gconftool-2 -s -t string $profile_path/colorscheme $1
+  fi
 }
 
 # Gets the name of the colorscheme currently applied to gnome-terminal.
 #
 gnome_terminal_get_colorscheme() {
-  local profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
-  local profile_path=/apps/gnome-terminal/profiles/$profile
+  if [ "$(gnome_terminal_version | cut -d"." -f1)$(gnome_terminal_version | cut -d"." -f2)" -ge 38 ]; then
+    local profile=$(dconf list /org/gnome/terminal/legacy/profiles:/ | head -1 | sed 's:/$::')
+    local profile_path="/org/gnome/terminal/legacy/profiles:/$profile"
 
-  echo $(gconftool-2 -g $profile_path/colorscheme)
+    echo $(dconf read $profile_path/colorscheme) | tr -d "'"
+  else
+    local profile=$(gconftool-2 -g /apps/gnome-terminal/global/default_profile);
+    local profile_path=/apps/gnome-terminal/profiles/$profile
+
+    echo $(gconftool-2 -g $profile_path/colorscheme)
+  fi
 }
 
 if [[ "$COLORTERM" != "gnome-terminal" ]]; then
