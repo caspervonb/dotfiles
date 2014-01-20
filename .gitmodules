@@ -22,3 +22,6 @@
 [submodule "vim/bundle/less"]
 	path = vim/bundle/less
 	url = https://github.com/groenewege/vim-less.git
+[submodule "vim/bundle/javascript"]
+	path = vim/bundle/javascript
+	url = https://github.com/pangloss/vim-javascript.git
